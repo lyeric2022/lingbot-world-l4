@@ -8,7 +8,7 @@ Patches to run [LingBot-World](https://github.com/robbyant/lingbot-world) on a *
 
 I was very impressed with Google's Genie 3 and wanted to try it out badly, but I also I didn't want to pay the $249.99/mo ultra subscription. I'm also chronically on Twitter, and saw that LingBot-World was a viable open-source option. 
 
-Initially I tried using **Nautilus** (academic Kubernetes cluster) but encountered persistent CUDA OOM errors in the containerized environment. Enraged, I pivoted to **Google Cloud Platform** ($300 trial credits given on new acc sign-up). Requested A100/H100 quota (the 35GB models would fit comfortably), but was denied- likely due to new account. Luckily, the **L4 (24GB)** was approved <1 min, which led to the memory optimization work documented here.
+I first tried **Nautilus** (academic Kubernetes cluster) but hit persistent CUDA OOM errors. Enraged, I pivoted to **Google Cloud Platform** ($300 trial credits on signup). Requested A100/H100 quota (the 35GB models would fit comfortably), but was denied—likely due to new account. Luckily, the **L4 (24GB)** was approved in <1 min, which led to the memory optimization work documented here.
 
 The official LingBot-World expects **8× GPUs with FSDP**. This repo enables running on a **single 24GB GPU** through layer-wise CPU offloading - slower but functional.
 

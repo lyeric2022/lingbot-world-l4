@@ -4,42 +4,32 @@ This guide documents a fully working setup for running LingBot-World image-to-vi
 
 ---
 
-## Background: Why GCP L4?
+## Setup Overview
 
-Initially tried [Nautilus](https://nationalresearchplatform.org/nautilus/) (academic K8s cluster) but hit persistent memory issues in the containerized environment. Pivoted to **GCP** using the **$300 free trial credits** given on signup.
+Using **GCP** with **$300 free trial credits** on signup.
 
 ### GPU Selection
 
-| GPU | VRAM | GCP Availability | My Status |
-|-----|------|------------------|-----------|
+| GPU | VRAM | GCP Availability | Status |
+|-----|------|------------------|--------|
 | **H100** | 80GB | Limited | Quota denied |
 | **A100** | 40-80GB | Limited | Quota denied |
 | **L4** | 24GB | Generally available | Approved (<1 min) |
-
-The **A100 and H100 would be better** - the 14B models would fit without offloading. But GCP denied my quota requests (new account). L4 was approved instantly, which led to the memory optimization journey documented here.
 
 ### Cost
 
 - `g2-standard-32` + L4: ~$2.50/hour
 - $300 free credits = ~120 hours of compute
-- Enough for dozens of video generations
+
+### System Configuration
+
+- **OS:** Debian 12 (Bookworm)
+- **GPU:** NVIDIA L4 (24GB VRAM)
+- **Machine:** g2-standard-32 (32 vCPU, 128GB RAM)
 
 ---
 
-## System Configuration
-
-**Tested OS:**
-- Debian 12 (Bookworm)
-
-**GPU:**
-- NVIDIA L4 (24GB VRAM)
-
-**Machine Type:**
-- g2-standard-32 (32 vCPU, 128GB RAM)
-
----
-
-## Understanding the Memory Challenge
+## The Memory Challenge
 
 LingBot A14B uses **two separate 14-billion parameter models**:
 - `low_noise_model` - used for low noise timesteps
@@ -189,7 +179,6 @@ pip install packaging wheel ninja psutil accelerate
 ## 9. Install Flash-Attn
 
 ```bash
-pip install ninja packaging psutil  # Required for build
 python -m pip install flash-attn --no-build-isolation
 ```
 
@@ -499,7 +488,7 @@ Each trajectory folder contains:
 
 You can extract camera paths from existing videos using [ViPE](https://github.com/robbyant/vipe) or create custom trajectories.
 
-**Example: Longer video with higher quality:**
+**Example: Higher quality (more steps):**
 ```bash
 python generate.py \
   --task i2v-A14B \
@@ -507,7 +496,7 @@ python generate.py \
   --prompt "your prompt here" \
   --image /path/to/your/image.jpg \
   --save_file outputs/video2.mp4 \
-  --frame_num 17 \
+  --frame_num 9 \
   --size 480*832 \
   --sample_steps 20 \
   --sample_guide_scale 6.5 \

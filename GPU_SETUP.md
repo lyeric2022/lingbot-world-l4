@@ -513,7 +513,7 @@ python generate.py \
 ┌─────────────────────────────────────────────────────────────┐
 │                    Traditional Loading                       │
 │                                                              │
-│  GPU [████████████████████████████] 35GB model → OOM!       │
+│  GPU [████████████████████████████] 28GB model → OOM!       │
 │      [        24GB available      ]                          │
 └─────────────────────────────────────────────────────────────┘
 
@@ -619,7 +619,7 @@ You've successfully:
 - ✅ Installed CUDA drivers and toolkit
 - ✅ Built the PyTorch + Flash-Attention stack
 - ✅ Downloaded 140GB+ of model checkpoints
-- ✅ Diagnosed VRAM constraints (35GB model vs 24GB GPU)
+- ✅ Diagnosed VRAM constraints (28GB model vs 24GB GPU)
 - ✅ Implemented 4 code patches for layer-wise CPU offloading
 - ✅ Fixed meta tensor cleanup issues
 - ✅ Generated video successfully

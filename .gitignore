@@ -12,9 +12,11 @@ checkpoints/
 
 # Output files
 outputs/
-*.mp4
 *.avi
 *.mov
+
+# Allow example videos
+!examples/*.mp4
 
 # Python
 __pycache__/

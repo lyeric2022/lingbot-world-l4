@@ -16,7 +16,7 @@ See [GPU_SETUP.md](GPU_SETUP.md) for the complete setup journey from VM creation
 
 ## The Problem
 
-LingBot-World A14B uses two 14B parameter models (~35GB each in bfloat16). This exceeds 24GB VRAM.
+LingBot-World A14B uses two 14B parameter models (~28GB each in bfloat16, ~56GB total). This exceeds 24GB VRAM.
 
 ## The Solution
 

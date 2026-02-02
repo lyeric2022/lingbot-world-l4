@@ -35,7 +35,7 @@ LingBot A14B uses **two separate 14-billion parameter models**:
 - `low_noise_model` - used for low noise timesteps
 - `high_noise_model` - used for high noise timesteps
 
-Each model is **~70GB on disk** and requires **~28-35GB VRAM** when loaded in bfloat16. This far exceeds the L4's 24GB.
+Each model is 14B parameters and requires **~28GB VRAM** when loaded in bfloat16 (~56GB total for both). This far exceeds the L4's 24GB.
 
 **The Solution:** We use **Hugging Face Accelerate's `dispatch_model`** to enable **layer-wise CPU offloading**. Instead of loading the entire model to GPU, it:
 

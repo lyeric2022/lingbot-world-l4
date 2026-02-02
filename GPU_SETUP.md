@@ -478,7 +478,7 @@ Once working, you can adjust:
 
 | Parameter | Effect | L4 Safe Range |
 |-----------|--------|---------------|
-| `--frame_num` | More frames = longer video | 5-17 |
+| `--frame_num` | More frames = longer video | 5-9 (max 9 tested) |
 | `--sample_steps` | Higher = better quality, slower | 8-20 |
 | `--size` | Resolution (WxH or HxW) | 480*832, 832*480 |
 | `--sample_guide_scale` | Prompt adherence (higher = stronger) | 5.0-7.5 |
@@ -608,8 +608,8 @@ On L4 with layer-wise offloading (tested):
 
 Even with all optimizations:
 - This model **barely fits** on 24GB VRAM
-- Some prompts/frame counts still cause OOM
-- Longer videos (17+ frames) require A100/H100 or multi-GPU FSDP
+- **Max 9 frames** - tested 13 and 17, both OOM
+- Frame count must be `4n+1` (5, 9, 13, 17...), so 9 is the ceiling
 - You are at the **edge of consumer VRAM physics**
 
 This setup is a workaround, not the intended deployment. The official LingBot-World expects 8× A100 GPUs with FSDP.

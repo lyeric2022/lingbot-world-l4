@@ -1,0 +1,40 @@
+# Model files (download from HuggingFace)
+*.safetensors
+*.bin
+*.pth
+*.pt
+*.ckpt
+
+# Model directories
+lingbot-world-base-cam/
+models/
+checkpoints/
+
+# Output files
+outputs/
+*.mp4
+*.avi
+*.mov
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+env/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+nohup.out

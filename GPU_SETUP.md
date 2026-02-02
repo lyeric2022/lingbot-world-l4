@@ -84,6 +84,28 @@ gcloud compute instances create lingbot-vm \
 
 ## 2. Connect
 
+### Generate SSH Key (if needed)
+
+```bash
+# On your local machine
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+### Add Key to VM
+
+Option A: Via GCP Console
+1. Go to Compute Engine → VM instances
+2. Click your instance → Edit
+3. Under "SSH Keys", add your public key (`~/.ssh/id_ed25519.pub`)
+
+Option B: Via gcloud CLI
+```bash
+gcloud compute ssh USERNAME@INSTANCE_NAME --zone=us-central1-c
+```
+(This auto-generates and adds keys)
+
+### Connect
+
 ```bash
 ssh USERNAME@VM_EXTERNAL_IP
 ```

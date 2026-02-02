@@ -2,7 +2,17 @@
 
 Patches to run [LingBot-World](https://github.com/robbyant/lingbot-world) on a **single 24GB GPU** (L4/RTX 4090/A10).
 
-> For installation, model downloads, and usage, see the [official repo](https://github.com/robbyant/lingbot-world).
+> For installation, model downloads, and official usage, see the [original repo](https://github.com/robbyant/lingbot-world).
+
+## Background
+
+I wanted to run LingBot-World locally but hit memory constraints. First tried **Nautilus** (academic Kubernetes cluster) but encountered persistent CUDA OOM errors in the containerized environment.
+
+Pivoted to **Google Cloud Platform** using the **$300 free trial credits**. Requested A100/H100 quota (the 35GB models would fit comfortably), but was denied - likely due to new account. The **L4 (24GB)** was approved instantly (<1 min), which led to the memory optimization work documented here.
+
+The official LingBot-World expects **8× GPUs with FSDP**. This repo enables running on a **single 24GB GPU** through layer-wise CPU offloading - slower but functional.
+
+See [GPU_SETUP.md](GPU_SETUP.md) for the complete setup journey from VM creation to video generation.
 
 ## The Problem
 
@@ -57,10 +67,6 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True python generate.py \
 | **Total** | **~17-20 min** |
 
 Frame limit: 9-13 frames tested working, 17+ causes OOM.
-
-## Background
-
-Tried Nautilus (academic K8s) first - hit memory issues. Pivoted to GCP with $300 free credits. A100/H100 quota denied, L4 approved instantly. See [GPU_SETUP.md](GPU_SETUP.md) for the full journey.
 
 ## License
 
